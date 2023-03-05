@@ -44,13 +44,13 @@ export function Header({ create='show' }) {
                                 <nav className="my-4">
                                     <ul className="flex flex-col gap-2">
                                         <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#">Profile Settings</a>
+                                            <a href="#" className="block">Profile Settings</a>
                                         </li>
                                         <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#">Dashboard</a>
+                                            <a href="#" className="block">Dashboard</a>
                                         </li>
                                         <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#">Liked</a>
+                                            <a href="#" className="block">Liked</a>
                                         </li>
                                         <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
                                             <p>Theme</p>

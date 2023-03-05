@@ -1,13 +1,26 @@
 import { useState } from "react"
+import { toast } from "wc-toast"
 import { Header } from "../Home/Header"
 
 export function Create() {
 
     const [ result, setResult ] = useState(null)
+    const [user, setUser] = useState(null)
+    const [input, setInput] = useState({
+        prompt: ''
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('works')
+        if(input.prompt == '') return toast.error('Please fill the input!', {theme: {type: 'dark'}})
+
+        console.log('work')
+    }
+    const handdleChange = e => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
     }
 
     return (
@@ -20,7 +33,7 @@ export function Create() {
 
                     <form className="pt-10" onSubmit={e => handleSubmit(e)}>
                         <label htmlFor="prompt">Your Prompt</label>
-                        <input type="text" id="prompt" className="block p-2 border border-gray-400 rounded-lg outline-none mt-2" placeholder="an amazing landscape"/>
+                        <input type="text" id="prompt" name='prompt' className="block p-2 border border-gray-400 rounded-lg outline-none mt-2" placeholder="an amazing landscape" onChange={e => handdleChange(e)}/>
 
                         {
                             result 
@@ -32,7 +45,7 @@ export function Create() {
                             </div>
 
                         }
-                        <input type="submit" value="Generate!" className="bg-black text-white mt-4 py-4 px-8 rounded-md hover:bg-white hover:text-black cursor-pointer hover:border hover:border-black transition-all"/>
+                        <input type="submit" value="Generate!" className="bg-black text-white mt-4 py-4 px-8 rounded-md hover:bg-white hover:text-black cursor-pointer hover:border hover:border-black"/>
                         {
                             result && <button>Share with community</button>
                         }
