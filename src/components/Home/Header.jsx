@@ -4,7 +4,7 @@ import { Link } from "wouter"
 
 export function Header({ create='show' }) {
 
-    const [ logged, setLog ] = useState(true)
+    const [ logged, setLog ] = useState(false)
     const [active, setActive] = useState(false)
 
     return (
@@ -22,13 +22,17 @@ export function Header({ create='show' }) {
                     {
                     !logged 
                     ? 
-                        <nav className="register flex gap-4">
-                            <button className="register text-gray-500 hover:text-black transition-all">
-                                Register
-                            </button>
-                            <button className="login text-gray-500 hover:text-black transition-all">
-                                Login
-                            </button>
+                        <nav className="register flex gap-4 items-center">
+                            <Link to="/login">
+                                <a className="register text-gray-500 hover:text-black transition-all">
+                                    Login
+                                </a>
+                            </Link>
+                            <Link to="/signup">
+                                <a className="register text-white bg-black border border-black py-1 px-4 rounded-lg hover:bg-white hover:text-black">
+                                    Sign Up
+                                </a>
+                            </Link>
                         </nav> 
                     :
                     <div className="navegation flex gap-1 items-center relative">
