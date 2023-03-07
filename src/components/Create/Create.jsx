@@ -33,7 +33,7 @@ export function Create() {
 
                     <form className="pt-10" onSubmit={e => handleSubmit(e)}>
                         <label htmlFor="prompt">Your Prompt</label>
-                        <input type="text" id="prompt" name='prompt' className="block p-2 border border-gray-400 rounded-lg outline-none mt-2" placeholder="an amazing landscape" onChange={e => handdleChange(e)}/>
+                        <input type="text" id="prompt" name='prompt' className="block p-2 border border-gray-400 rounded-lg outline-none mt-2 sm:w-[600px]" placeholder="an amazing landscape" onChange={e => handdleChange(e)}/>
 
                         {
                             result 
