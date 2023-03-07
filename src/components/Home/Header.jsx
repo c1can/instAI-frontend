@@ -36,9 +36,6 @@ export function Header() {
                         </nav> 
                     :
                     <div className="navegation flex gap-1 items-center relative">
-                            <Link to="/create">
-                                <a className={`text-white bg-black py-2 px-8 rounded-lg mr-6`}>Create</a>
-                            </Link>
                             <button className="avatar h-[40px] w-[40px] rounded-full bg-black" onClick={() => setActive(!active)}></button>
 
                             <div className={`z-100 bg-white absolute h-[350px] w-[250px] top-12 right-0 shadow-xl rounded-lg flex flex-col py-8 ${active ? 'block' : 'hidden'}`}>
