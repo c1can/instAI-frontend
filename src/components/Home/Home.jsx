@@ -16,7 +16,7 @@ export function Home() {
                     <div className="headerMain mb-8 flex justify-between items-center">
                        <h1 className="text-2xl font-semibold">Community Posts</h1>
                         <Link to="/create">
-                            <a className="bg-black text-white py-2 px-8 rounded-lg">Create</a>
+                            <a className="bg-black border border-black text-white py-2 px-8 rounded-lg hover:bg-white hover:text-black">Create</a>
                         </Link>
                     </div>
 
