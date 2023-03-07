@@ -17,7 +17,7 @@ export function SignUp() {
                                 Continue with Google
                         </button>
                     </div>
-                    <div className="already flex gap-2 justify-center">
+                    <div className="already flex gap-2 justify-center border-t border-gray-300 pt-2">
                         <p>already have an account?</p>
                         <Link to="/login">
                             <a className="text-gray-600 hover:text-blue-500">Log in</a>

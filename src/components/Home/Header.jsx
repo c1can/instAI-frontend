@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "wouter"
 
 
-export function Header({ create='show' }) {
+export function Header() {
 
     const [ logged, setLog ] = useState(false)
     const [active, setActive] = useState(false)
@@ -37,8 +37,7 @@ export function Header({ create='show' }) {
                     :
                     <div className="navegation flex gap-1 items-center relative">
                             <Link to="/create">
-
-                            <a className={`text-white bg-black py-2 px-8 rounded-lg mr-6 ${create == 'show' ? 'block' : 'hidden'}`}>Create</a>
+                                <a className={`text-white bg-black py-2 px-8 rounded-lg mr-6`}>Create</a>
                             </Link>
                             <button className="avatar h-[40px] w-[40px] rounded-full bg-black" onClick={() => setActive(!active)}></button>
 
