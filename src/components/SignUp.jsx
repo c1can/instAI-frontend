@@ -13,7 +13,7 @@ export function SignUp() {
 
 
                     <form>
-                        <div className="names flex flex-col md:flex-row md:gap-4 mb-4">
+                        <div className="names flex gap-4 flex-col md:flex-row mb-4">
                             <div className="in">
                                 <label htmlFor="name" className="text-xl text-gray-700 mb-2">Name</label>
                                 <input type="text" name="name" id="name" className="block p-2 rounded-lg border border-gray-400 outline-none w-full"/>
@@ -31,7 +31,7 @@ export function SignUp() {
                             <input type="submit" value="Submit" className="py-2 px-6 border bg-black border-black text-white my-4 rounded-lg cursor-pointer hover:bg-white hover:text-black"/>
                     </form>
                     
-                    <p className="text-center my-4 border-b border-gray-400 pb-2">Or</p>
+                    <p className="text-center my-4 border-b border-gray-400 pb-2 font-mono">Or</p>
 
                     <div className="providers flex flex-col gap-4 mb-4 md:flex-row md:gap-2 md:justify-center">
                         <button onClick={signInWithGithub} type="button" className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30">
