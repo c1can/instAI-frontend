@@ -7,8 +7,20 @@ export function Login() {
             <Header />
             <main className="h-[94vh]">
                 <div className="container m-auto h-full grid place-items-center">
-                    <div className="mainCard">
-                    <h1 className="text-4xl font-semibold text-center">Login to insta<span className="text-5xl">IA</span></h1>
+                    <div className="mainCard p-4">
+                        <h1 className="text-4xl font-semibold text-center mb-6">Login to insta<span className="text-5xl">IA</span></h1>
+
+                        <form>
+                               <label htmlFor="email" className="text-xl mb-2 text-gray-700">Email</label>
+                                <input type="text" name="email" id="email" className="block p-2 w-full mb-4 border border-gray-400 rounded-lg outline-none"/>
+
+                                <label htmlFor="password" className="text-xl mb-2 text-gray-700">Password</label>
+                                <input type="password" name="password" id="password" className="block p-2 w-full border border-gray-400 rounded-lg outline-none"/>
+
+                                <input type="submit" value="Submit" className="py-2 px-6 border bg-black border-black text-white my-4 rounded-lg cursor-pointer hover:bg-white hover:text-black"/>
+                        </form>
+
+                        <p className="text-center border-b border-gray-400 pb-2 font-mono">Or</p>
 
                         <div className="providers flex flex-col gap-4 mt-14 mb-4 md:flex-row md:gap-2">
                             <button type="button" className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30">
