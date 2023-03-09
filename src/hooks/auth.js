@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Auth } from "../context/Auth";
 
 export function useAuth() {
-    const { signInWithGmail, signInWithGithub } = useContext(Auth)
+    const { signInWithGithub, signUpWithEmail, signInWithEmail, user, signOut } = useContext(Auth)
 
-    return { signInWithGithub, signInWithGmail }
+    return { signInWithGithub, signUpWithEmail, user, signOut, signInWithEmail }
 }

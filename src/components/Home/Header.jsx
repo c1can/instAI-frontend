@@ -1,11 +1,17 @@
 import { useState } from "react"
 import { Link } from "wouter"
+import { useAuth } from "../../hooks/auth"
 
 
 export function Header() {
 
-    const [ logged, setLog ] = useState(false)
+    const { user, signOut } = useAuth()
     const [active, setActive] = useState(false)
+
+    const signOutSession = async() => {
+        await signOut()
+        window.location.reload(true)
+    }
 
     return (
         <header className="border border-white h-[70px]">
@@ -20,7 +26,7 @@ export function Header() {
                     </div>
 
                     {
-                    !logged 
+                    user == null || user['session'] == null
                     ? 
                         <nav className="register flex gap-4 items-center">
                             <Link to="/login">
@@ -36,10 +42,10 @@ export function Header() {
                         </nav> 
                     :
                     <div className="navegation flex gap-1 items-center relative">
-                            <button className="avatar h-[40px] w-[40px] rounded-full bg-black" onClick={() => setActive(!active)}></button>
+                            <button style={{backgroundImage: `${user.session.user.user_metadata.avatar_url ? `url(${user.session.user.user_metadata.avatar_url})` : null}`}} className={`avatar h-[40px] w-[40px] rounded-full ${user.session.user.user_metadata.avatar_url ? 'bg-cover bg-center bg-no-repeat' : 'bg-black'}`} onClick={() => setActive(!active)}></button>
 
                             <div className={`z-100 bg-white absolute h-[350px] w-[250px] top-12 right-0 shadow-xl rounded-lg flex flex-col py-8 ${active ? 'block' : 'hidden'}`}>
-                                <p className="text-gray-600 border-b border-gray-300 text-center pb-2">Carlos Reyes</p>
+                                <p className="text-gray-600 border-b border-gray-300 text-center pb-2">{user.session.user.email}</p>
 
                                 <nav className="my-4">
                                     <ul className="flex flex-col gap-2">
@@ -58,7 +64,7 @@ export function Header() {
                                     </ul>
                                 </nav>
 
-                                <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white">Logout</button>
+                                <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white" onClick={signOutSession}>Logout</button>
                             </div>
                         </div>
                     }
