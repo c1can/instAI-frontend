@@ -7,8 +7,6 @@ export function SignUp() {
 
     const { signInWithGithub, signUpWithEmail } = useAuth()
     const [data, setData] = useState({
-        name: '',
-        lastName: '',
         email: '',
         password: ''
     })
@@ -16,9 +14,9 @@ export function SignUp() {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const { name, lastName, email, password } = data
+        const { email, password } = data
 
-        if(name == '' || lastName == '' || email == '' || password == '') {
+        if(email == '' || password == '') {
             return toast.error('Fill in all the fields!', {
                 theme: {
                     type: 'dark'
@@ -26,7 +24,7 @@ export function SignUp() {
             })
         }
 
-        const error = await signUpWithEmail(name, lastName, email, password)
+        const error = await signUpWithEmail(email, password)
         if(error) return toast.error(error, {
             theme: {
                 type: 'dark'
@@ -43,16 +41,6 @@ export function SignUp() {
 
 
                     <form onSubmit={handleSubmit}>
-                        <div className="names flex gap-4 flex-col md:flex-row mb-4">
-                            <div className="in">
-                                <label htmlFor="name" className="text-xl text-gray-700 mb-2">Name</label>
-                                <input type="text" name="name" id="name" className="block p-2 rounded-lg border border-gray-400 outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
-                            </div>
-                            <div className="in">
-                                <label htmlFor="lastName" className="text-xl text-gray-700 mb-2">Last Name</label>
-                                <input type="text" name="lastName" id="lastName" className="block p-2 rounded-lg border border-gray-400 outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
-                            </div>
-                        </div>
                             <label htmlFor="email" className="text-xl text-gray-700">Email</label>
                             <input type="email" name="email" id="email" className="block p-2 rounded-lg border border-gray-400 outline-none w-full mb-4" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
                             <label htmlFor="password" className="text-xl text-gray-700">Password</label>

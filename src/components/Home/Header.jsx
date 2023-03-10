@@ -26,7 +26,7 @@ export function Header() {
                     </div>
 
                     {
-                    user == null || user['session'] == null
+                    user['session'] == null
                     ? 
                         <nav className="register flex gap-4 items-center">
                             <Link to="/login">

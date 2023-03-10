@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { toast } from "wc-toast"
+import { useAuth } from "../../hooks/auth"
 import { Header } from "../Home/Header"
 
 export function Create() {
 
     const [ result, setResult ] = useState(null)
-    const [user, setUser] = useState(null)
+    const { user } = useAuth()
     const [input, setInput] = useState({
         prompt: ''
     })
@@ -13,8 +14,7 @@ export function Create() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(input.prompt == '') return toast.error('Please fill the input!', {theme: {type: 'dark'}})
-
-        console.log('work')
+        if(user['session'] == null) return toast.error('Please sign up or login!', {theme: {type: 'dark'}})
     }
     const handdleChange = e => {
         setInput({

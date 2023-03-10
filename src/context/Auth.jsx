@@ -8,7 +8,7 @@ export function AuthContextProvider({children}) {
 
     const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({session: null})
 
     const getUserSession = async () => {
         const { data, error } = await supabase.auth.getSession()
@@ -17,20 +17,13 @@ export function AuthContextProvider({children}) {
     }
 
     useEffect(() => {
-        console.log('change')
         getUserSession()     
     }, [])
 
-    const signUpWithEmail = async(name, lastName, email, password) => {
+    const signUpWithEmail = async(email, password) => {
         const { data, error } = await supabase.auth.signUp({
             email: email,
-            password: password,
-            options: {
-                data: {
-                    name: name,
-                    lastName: lastName
-                }
-            }
+            password: password
         })
 
         if(error) return error
