@@ -14,13 +14,19 @@ export function Create() {
     })
     
     const [loading, setLoading] = useState(false)
+    const [shareLoading, setShareLoading] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        if(loading) return
         if(input.prompt == '') return toast.error('Please fill the input!', {theme: {type: 'dark'}})
         if(user['session'] == null) return toast.error('Please sign up or login!', {theme: {type: 'dark'}})
 
+        setInput({
+            ...input,
+            image: ''
+        })
 
         setLoading(true)
 
@@ -35,8 +41,15 @@ export function Create() {
             body: JSON.stringify({prompt: input.prompt}),
         })
         .then(response => response.json())
-        .then(data => {
+        .then(data => { 
             setLoading(false)
+            if(data.error) {
+                return toast.error('something went wrong! try with another input', {
+                    theme: {
+                        type: 'dark'
+                    }
+                })
+            }
             setInput({
                 ...input,
                 user: email,
@@ -49,6 +62,7 @@ export function Create() {
     const handleShare = (e) => {
         e.preventDefault()
 
+        setShareLoading(true)
         fetch(`${import.meta.env.VITE_API_URL}/community-share`, {
             method: 'POST',
             headers: {
@@ -57,6 +71,7 @@ export function Create() {
             body: JSON.stringify(input)
         })
         .then(result => {
+            setShareLoading(false)
             result.error
             ? toast.error('sorry, something went wrong')
             : toast.success('you have succesfully created a post!')
@@ -111,10 +126,10 @@ export function Create() {
 
                         }
                         <div className={`${input.image !== '' ? 'flex flex-col gap-4 md:flex-row md:items-center' : ''}`}>
-                           <input type="submit" value={loading ? 'Generating...' : 'Generate!'} className={`${loading ? 'bg-gray-500' : 'bg-black'} border border-black text-white py-4 px-8 rounded-md hover:bg-white hover:text-black cursor-pointer`}/>
+                           <input type="submit" value={loading ? 'Generating...' : 'Generate!'} className={`${loading ? 'bg-gray-500 border-none' : 'bg-black'} border border-black text-white py-4 px-8 rounded-md hover:bg-white hover:text-black cursor-pointer`}/>
                             {
 
-                                 input.image !== '' && <button onClick={(e) => handleShare(e)} className="py-4 px-8 rounded-md hover:bg-gray-500 hover:text-white border border-black hover:border-none">Share with community</button>
+                                 input.image !== '' && <input type='button' onClick={(e) => handleShare(e)} className="py-4 px-8 rounded-md hover:bg-gray-500 hover:text-white border border-black hover:border-none cursor-pointer" value={shareLoading ? 'Sharing...' : 'Share with Community'}></input>
                             } 
                         </div>
                     </form>
