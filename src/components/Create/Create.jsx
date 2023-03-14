@@ -13,7 +13,7 @@ export function Create() {
             <main className="pt-10">
                 <div className="container m-auto">
                     <h1 className="text-2xl font-semibold">Create</h1>
-                    <p className="mt-4 text-lg">Create everything you can imagine with the help of Dall-e OpenIA API</p>
+                    <p className="mt-4 text-lg">Create everything you can imagine with the help of Dall-e OpenAI API</p>
 
                     <form className="pt-10 max-w-[800px]" onSubmit={e => handleSubmit(e)}>
                         <label htmlFor="prompt">Your Prompt</label>
