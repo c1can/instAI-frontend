@@ -1,85 +1,11 @@
-import { useState } from "react"
-import { toast } from "wc-toast"
-import { useAuth } from "../../hooks/auth"
 import { Header } from "../Home/Header"
+import { useCreate } from "../../hooks/useCreate"
+import { useShare } from "../../hooks/useShare"
 
 export function Create() {
 
-    const { user } = useAuth()
-
-    const [input, setInput] = useState({
-        prompt: '',
-        user: '',
-        image: ''
-    })
-    
-    const [loading, setLoading] = useState(false)
-    const [shareLoading, setShareLoading] = useState(false)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if(loading) return
-        if(user['session'] == null) return toast.error('Please sign up or login!', {theme: {type: 'dark'}}) //change this
-        if(input.prompt == '') return toast.error('Please fill the input!', {theme: {type: 'dark'}})
-
-        setInput({
-            ...input,
-            image: ''
-        })
-
-        setLoading(true)
-
-        const { session } = user
-        const email = session.user.email
-
-        fetch(`${import.meta.env.VITE_API_URL}/create`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({prompt: input.prompt}),
-        })
-        .then(response => response.json())
-        .then(data => { 
-            setLoading(false)
-            if(data.error) {
-                return toast.error('something went wrong! try with another input', {
-                    theme: {
-                        type: 'dark'
-                    }
-                })
-            }
-            setInput({
-                ...input,
-                user: email,
-                image: `data:image/jpeg;base64,${data.image}`
-            })
-        })
-        .catch(error => console.log(error))
-    }
-
-    const handleShare = (e) => {
-        e.preventDefault()
-
-        setShareLoading(true)
-        fetch(`${import.meta.env.VITE_API_URL}/community-share`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(input)
-        })
-        .then(result => {
-            setShareLoading(false)
-            result.error
-            ? toast.error('sorry, something went wrong')
-            : toast.success('you have succesfully created a post!')
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
+    const { input, setInput, loading, handleSubmit } = useCreate()
+    const { shareLoading, handleShare } = useShare(input)
 
     return (
         <>
