@@ -9,7 +9,7 @@ export function Home() {
     return (
         <>
             <Header />
-            <main className="pt-10">
+            <main className="py-10">
                 <div className="container m-auto">
                     <div className="headerMain mb-8 flex justify-between items-center">
                        <h1 className="text-2xl font-semibold">Community Posts</h1>
