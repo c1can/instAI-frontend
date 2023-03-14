@@ -42,7 +42,7 @@ export function Header() {
                         </nav> 
                     :
                     <div className="navegation flex gap-1 items-center relative">
-                            <button style={{backgroundImage: `${user.session.user.user_metadata.avatar_url ? `url(${user.session.user.user_metadata.avatar_url})` : null}`}} className={`avatar h-[40px] w-[40px] rounded-full ${user.session.user.user_metadata.avatar_url ? 'bg-cover bg-center bg-no-repeat' : 'bg-black'}`} onClick={() => setActive(!active)}></button>
+                            <button style={{backgroundImage: `${user.session.user.user_metadata.avatar_url ? `url(${user.session.user.user_metadata.avatar_url})` : null}`}} className={`avatar h-[40px] w-[40px] rounded-full ${user.session.user.user_metadata.avatar_url ? 'bg-cover bg-center bg-no-repeat' : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'}`} onClick={() => setActive(!active)}></button>
 
                             <div className={`z-100 bg-white absolute h-[350px] w-[250px] top-12 right-0 shadow-xl rounded-lg flex flex-col py-8 ${active ? 'block' : 'hidden'}`}>
                                 <p className="text-gray-600 border-b border-gray-300 text-center pb-2">{user.session.user.email}</p>
