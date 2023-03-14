@@ -20,8 +20,8 @@ export function Create() {
         e.preventDefault()
 
         if(loading) return
+        if(user['session'] == null) return toast.error('Please sign up or login!', {theme: {type: 'dark'}}) //change this
         if(input.prompt == '') return toast.error('Please fill the input!', {theme: {type: 'dark'}})
-        if(user['session'] == null) return toast.error('Please sign up or login!', {theme: {type: 'dark'}})
 
         setInput({
             ...input,
