@@ -19,7 +19,7 @@ export function Home() {
                     </div>
 
                     {
-                        posts.length > 0
+                        Array.isArray(posts) && posts.length > 0
                         ? 
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                             {
@@ -29,7 +29,9 @@ export function Home() {
                             }
                         </div>
                         :
-                        <p>Users haven't post</p>
+                          Array.isArray(posts) && posts.length == 0
+                         ? <p>Users haven't post</p>
+                         : <p>{posts.error}</p>
                     }
                 </div>
             </main>
