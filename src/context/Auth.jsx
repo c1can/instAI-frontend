@@ -17,7 +17,7 @@ export function AuthContextProvider({children}) {
     }
 
     useEffect(() => {
-        getUserSession()     
+        getUserSession()
     }, [])
 
     const signUpWithEmail = async(email, password) => {

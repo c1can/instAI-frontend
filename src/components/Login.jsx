@@ -6,11 +6,13 @@ import { Header } from './Home/Header'
 
 export function Login() {
 
-    const { signInWithEmail, signInWithGithub } = useAuth()
-    const [userData, setData] = useState({
+    const userTemplate = {
         email: '',
         password: ''
-    })
+    }
+
+    const { signInWithEmail, signInWithGithub } = useAuth()
+    const [userData, setData] = useState(userTemplate)
     const [, setPath] = useLocation()
 
     const handleSubmit = async(e) => {
@@ -22,6 +24,8 @@ export function Login() {
                 type: 'dark'
             }
         })
+
+        setData(userTemplate)
 
         const error = await signInWithEmail(email, password)
 
@@ -44,10 +48,10 @@ export function Login() {
 
                         <form onSubmit={handleSubmit}>
                                <label htmlFor="email" className="text-xl mb-2 text-gray-700">Email</label>
-                                <input type="text" name="email" id="email" className="block p-2 w-full mb-4 border border-gray-400 rounded-lg outline-none" onChange={e => setData({...userData, [e.target.name]: e.target.value})}/>
+                                <input type="text" name="email" id="email" value={userData.email} className="block p-2 w-full mb-4 border border-gray-400 rounded-lg outline-none" onChange={e => setData({...userData, [e.target.name]: e.target.value})}/>
 
                                 <label htmlFor="password" className="text-xl mb-2 text-gray-700">Password</label>
-                                <input type="password" name="password" id="password" className="block p-2 w-full border border-gray-400 rounded-lg outline-none" onChange={e => setData({...userData, [e.target.name]: e.target.value})}/>
+                                <input type="password" name="password" id="password" value={userData.password} className="block p-2 w-full border border-gray-400 rounded-lg outline-none" onChange={e => setData({...userData, [e.target.name]: e.target.value})}/>
 
                                 <input type="submit" value="Submit" className="py-2 px-6 border bg-black border-black text-white my-4 rounded-lg cursor-pointer hover:bg-white hover:text-black"/>
                         </form>
