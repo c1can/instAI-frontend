@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { toast } from "wc-toast"
 import { useAuth } from "./auth"
 
@@ -8,9 +8,9 @@ export const useCreate = () => {
     const [input, setInput] = useState({
         prompt: '',
         user: '',
+        avatar: '',
         image: ''
     })
-
 
     const [loading, setLoading] = useState(false)
 
@@ -29,7 +29,13 @@ export const useCreate = () => {
         setLoading(true)
 
         const { session } = user
-        const email = session.user.email
+        const metadata = session.user.user_metadata 
+        const username = metadata.user_name
+
+        //gmail
+        const firstName = metadata.firstName
+        const lastName = metadata.lastName
+        const avatar = metadata.avatar_url
 
         fetch(`${import.meta.env.VITE_API_URL}/create`, {
             method: 'POST',
@@ -50,7 +56,8 @@ export const useCreate = () => {
             }
             setInput({
                 ...input,
-                user: email,
+                user: `${username}` || `${firstName} ${lastName}`,
+                avatar: avatar || null,
                 image: `data:image/jpeg;base64,${data.image}`
             })
         })
