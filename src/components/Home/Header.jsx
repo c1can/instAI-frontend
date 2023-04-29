@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "wouter"
 import { useAuth } from "../../hooks/auth"
 
@@ -7,11 +7,6 @@ export function Header() {
 
     const { user, signOut } = useAuth()
     const [active, setActive] = useState(false)
-
-    const signOutSession = async() => {
-        await signOut()
-        window.location.reload(true)
-    }
 
     return (
         <header className="border border-white h-[70px]">
@@ -66,7 +61,7 @@ export function Header() {
                                     </ul>
                                 </nav>
 
-                                <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white" onClick={signOutSession}>Logout</button>
+                                <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white" onClick={signOut}>Logout</button>
                             </div>
                         </div>
                     }

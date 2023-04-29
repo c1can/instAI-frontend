@@ -30,7 +30,7 @@ export function SignUp() {
                 type: 'dark'
             }
         })
-            setPath("/")
+        setPath("/")
     }
 
     return (

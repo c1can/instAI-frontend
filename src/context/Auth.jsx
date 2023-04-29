@@ -1,6 +1,6 @@
-
 import { createClient } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
+import { getStorage } from "../utils/getLocalStorage";
 
 export const Auth = createContext({})
 
@@ -8,17 +8,22 @@ export function AuthContextProvider({children}) {
 
     const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 
-    const [user, setUser] = useState({session: null})
+    const [user, setUser] = useState(getStorage()) 
 
-    const getUserSession = async () => {
-        const { data, error } = await supabase.auth.getSession()
-        
-        return error ? console.log(error) : setUser(data)
-    }
 
+    //try to fix this
     useEffect(() => {
-        getUserSession()
+        getUser()
     }, [])
+
+    //try to fix this
+    const getUser = async() => {
+        const { data, error } = await supabase.auth.getSession()
+
+        if(error) console.log(error)
+        setUser(data) //this actions innecesary repeats
+        window.localStorage.setItem('currentUser', JSON.stringify(data))
+    }
 
     const signUpWithEmail = async(email, password) => {
         const { data, error } = await supabase.auth.signUp({
@@ -27,8 +32,10 @@ export function AuthContextProvider({children}) {
         })
 
         if(error) return error
-        setUser(data)
+        setUser(data) 
+        window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
+
     const signInWithEmail = async(email, password) => {
         const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
@@ -37,23 +44,25 @@ export function AuthContextProvider({children}) {
 
         if(error) return error.message
         setUser(data)
+        window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
 
     const signInWithGithub = async() => {
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'github',
-            options: {
-                redirectTo: 'http://localhost:5173/'
-            }
-        })
-        if(error) console.log('error', error)
-        setUser(data)
+        try {
+            await supabase.auth.signInWithOAuth({
+                provider: 'github'
+            })
+        } catch (error) {
+            console.log(error)   
+        }
     }
 
     const signOut = async() => {
         const { error } = await supabase.auth.signOut()
+        if(error) return console.log(error)
 
-        if(error) console.log(error)
+        window.localStorage.clear('currentUser')
+        window.location.reload(true)
     } 
 
     return (
