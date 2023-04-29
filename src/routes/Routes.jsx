@@ -4,6 +4,7 @@ import { Create } from "../components/Create/Create"
 import { SignUp } from "../components/SignUp"
 import { Login } from "../components/Login"
 import { Settings } from "../components/Settings"
+import { ProtectRoute } from "../components/ProtectRoute"
 
 export function Routes() {
 
@@ -13,7 +14,11 @@ export function Routes() {
             <Route path="/signup" component={SignUp}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/create" component={Create}></Route>
-            <Route path="/settings" component={Settings}></Route>
+            <Route path="/settings">{
+                <ProtectRoute>
+                    <Settings />
+                </ProtectRoute>
+            }</Route>
         </>
     )
 }
