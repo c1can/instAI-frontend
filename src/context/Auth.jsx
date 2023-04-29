@@ -25,10 +25,16 @@ export function AuthContextProvider({children}) {
         window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
 
-    const signUpWithEmail = async(email, password) => {
+    const signUpWithEmail = async(email, password, name, lastName) => {
         const { data, error } = await supabase.auth.signUp({
             email: email,
-            password: password
+            password: password,
+            options: {
+                data: {
+                    firstName: name,
+                    lastName
+                }
+            }
         })
 
         if(error) return error
