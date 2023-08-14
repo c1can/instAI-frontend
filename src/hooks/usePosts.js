@@ -7,7 +7,9 @@ export function usePosts() {
     useEffect(() => {
         getPosts()
             .then(data => {
-                data ? setPosts(data) : setPosts({error: 'Hubo un error de conexión a la API'})
+                return data
+                ? setPosts(data)
+                : setPosts({ error: 'Error de conexion' })
             })
     }, [])
 
