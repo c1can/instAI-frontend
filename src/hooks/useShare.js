@@ -8,7 +8,7 @@ export const useShare = (input) => {
         e.preventDefault()
 
         setShareLoading(true)
-        fetch(`${import.meta.env.VITE_API_URL}/community-share`, {
+        fetch(`${import.meta.env.VITE_API_URL}/community/share`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ export const useShare = (input) => {
             setShareLoading(false)
             result.error
             ? toast.error('sorry, something went wrong')
-            : toast.success('you have succesfully created a post!')
+            : toast.success('you have created a post!')
         })
         .catch(error => {
             console.log(error)
