@@ -21,7 +21,7 @@ export function AuthContextProvider({children}) {
         const { data, error } = await supabase.auth.getSession()
 
         if(error) console.log(error)
-        setUser(data) //this actions innecesary repeats
+        setUser(data) //this actions innecesary repeats or maybe not
         window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
 
