@@ -1,6 +1,6 @@
-function Card({ user, prompt, image, _id, avatar }) {
+function Card({ user, prompt, image, avatar }) {
     return (
-        <div className="Card" key={_id}>
+        <div className="Card">
             <img src={image} alt={prompt} />
             <div className="info p-6 flex flex-col gap-4 bg-black opacity-90 rounded-sm">
                 <p className="text-gray-400"><span className="font-bold text-white">Prompt: </span>{prompt}</p>
