@@ -9,7 +9,7 @@ export function Header() {
     const [active, setActive] = useState(false)
 
     return (
-        <header className="border border-white h-[70px]">
+        <header className="shadow-md h-[70px]">
                 <div className="container m-auto h-full flex items-center justify-between">
                     <div className="flex gap-1 items-center">
                     <Link href="/" className="text-xl text-black">
