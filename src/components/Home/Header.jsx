@@ -36,33 +36,33 @@ export function Header() {
                             </Link>
                         </nav> 
                     :
-                    <div className="navegation flex gap-1 items-center relative">
-                            <button style={{backgroundImage: `${user.session.user.user_metadata.avatar_url ? `url(${user.session.user.user_metadata.avatar_url})` : null}`}} className={`avatar h-[40px] w-[40px] rounded-full ${user.session.user.user_metadata.avatar_url ? 'bg-cover bg-center bg-no-repeat' : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'}`} onClick={() => setActive(!active)}></button>
+                        <div className="navegation flex gap-1 items-center relative">
+                                    <button style={{backgroundImage: `${user.session.user.user_metadata.avatar_url ? `url(${user.session.user.user_metadata.avatar_url})` : null}`}} className={`avatar h-[40px] w-[40px] rounded-full ${user.session.user.user_metadata.avatar_url ? 'bg-cover bg-center bg-no-repeat' : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'}`} onClick={() => setActive(!active)}></button>
 
-                            <div className={`z-100 bg-white absolute h-[350px] w-[250px] top-12 right-0 shadow-xl rounded-lg flex flex-col py-8 ${active ? 'block' : 'hidden'}`}>
-                                <p className="text-gray-600 border-b border-gray-300 text-center pb-2">{user.session.user.email}</p>
+                                    <div className={`z-100 bg-white absolute h-[350px] w-[250px] top-12 right-0 shadow-xl rounded-lg flex flex-col py-8 ${active ? 'block' : 'hidden'}`}>
+                                        <p className="text-gray-600 border-b border-gray-300 text-center pb-2">{user.session.user.user_metadata.user_name || user.session.user.user_metadata.username}</p>
 
-                                <nav className="my-4">
-                                    <ul className="flex flex-col gap-2">
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 transition-all">
-                                            <Link href="/settings" className="block py-2">
-                                                Profile Settings
-                                            </Link>
-                                        </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#" className="block">Dashboard</a>
-                                        </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#" className="block">Liked</a>
-                                        </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <p>Theme</p>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                        <nav className="my-4">
+                                            <ul className="flex flex-col gap-2">
+                                                <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 transition-all">
+                                                    <Link href="/settings" className="block py-2">
+                                                        Profile Settings
+                                                    </Link>
+                                                </li>
+                                                <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
+                                                    <a href="#" className="block">Dashboard</a>
+                                                </li>
+                                                <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
+                                                    <a href="#" className="block">Liked</a>
+                                                </li>
+                                                <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
+                                                    <p>Theme</p>
+                                                </li>
+                                            </ul>
+                                        </nav>
 
-                                <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white" onClick={signOut}>Logout</button>
-                            </div>
+                                        <button className="bg-black py-2 self-center px-10 rounded-md hover:bg-white hover:text-black hover:border hover:border-black transition-all text-white" onClick={signOut}>Logout</button>
+                                    </div>
                         </div>
                     }
                 </div>

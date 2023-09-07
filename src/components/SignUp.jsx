@@ -9,16 +9,16 @@ export function SignUp() {
     const [data, setData] = useState({
         email: '',
         password: '',
+        username: '',
         name: '',
-        lastName: ''
     })
     const [, setPath] = useLocation()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const { email, password, name, lastName } = data
+        const { email, password, name, username } = data
 
-        if(email == '' || password == '' || name == '' || lastName == '') {
+        if(email == '' || password == '' || name == '' || username == '') {
             return toast.error('Fill in all the fields!', {
                 theme: {
                     type: 'dark'
@@ -26,7 +26,7 @@ export function SignUp() {
             })
         }
 
-        const error = await signUpWithEmail(email, password, name, lastName)
+        const error = await signUpWithEmail(email, password, name, username)
         if(error) return toast.error(error, {
             theme: {
                 type: 'dark'
@@ -44,13 +44,13 @@ export function SignUp() {
 
                     <form onSubmit={handleSubmit}>
                             <div className="names flex flex-col gap-2 mb-4 sm:flex-row">
+                                <div className="username">
+                                    <label htmlFor="username" className="text-xl text-gray-700">Username</label>
+                                    <input type="text" name="username" id="username" className="block p-2 rounded-lg border border-gray-400 outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
+                                </div>
                                 <div className="name">
                                     <label htmlFor="name" className="text-xl text-gray-700">Name</label>
-                                    <input type="text" name='name' id="name" className="block p-2 rounded-lg border border-gray-400 outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
-                                </div>
-                                <div className="lastName">
-                                    <label htmlFor="lastName" className="text-xl text-gray-700">Last Name</label>
-                                    <input type="text" name="lastName" id="lastName" className="block border border-gray-400 p-2 rounded-lg outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
+                                    <input placeholder="John Doe" type="text" name='name' id="name" className="block p-2 rounded-lg border border-gray-400 outline-none w-full" onChange={e => setData({...data, [e.target.name]: e.target.value})}/>
                                 </div>
                             </div>
                             <label htmlFor="email" className="text-xl text-gray-700">Email</label>
