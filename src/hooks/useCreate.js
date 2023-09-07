@@ -31,10 +31,6 @@ export const useCreate = () => {
         const { session } = user
         const metadata = session.user.user_metadata 
         const username = metadata.user_name
-
-        //gmail
-        const firstName = metadata.firstName
-        const lastName = metadata.lastName
         const avatar = metadata.avatar_url
 
         fetch(`${import.meta.env.VITE_API_URL}/create`, {
@@ -56,7 +52,7 @@ export const useCreate = () => {
             }
             setInput({
                 ...input,
-                user: `${username}` || `${firstName} ${lastName}`,
+                user: username,
                 avatar: avatar || null,
                 image: `data:image/jpeg;base64,${data.image}`
             })

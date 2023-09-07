@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
 import { getStorage } from "../utils/getLocalStorage";
+import { toast } from "wc-toast";
 
 export const Auth = createContext({})
 
@@ -10,13 +11,10 @@ export function AuthContextProvider({children}) {
 
     const [user, setUser] = useState(getStorage()) 
 
-
-    //try to fix this
     useEffect(() => {
         getUser()
     }, [])
 
-    //try to fix this
     const getUser = async() => {
         const { data, error } = await supabase.auth.getSession()
 
@@ -25,14 +23,14 @@ export function AuthContextProvider({children}) {
         window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
 
-    const signUpWithEmail = async(email, password, name, lastName) => {
+    const signUpWithEmail = async(email, password, name, username) => {
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
             options: {
                 data: {
-                    firstName: name,
-                    lastName
+                    full_name: name,
+                    user_name: username
                 }
             }
         })
@@ -53,7 +51,7 @@ export function AuthContextProvider({children}) {
         window.localStorage.setItem('currentUser', JSON.stringify(data))
     }
 
-    const signInWithGithub = async() => {
+    const signInWithGithub = async() => { //al parecer esto hace un reload automatico por eso tuve que hacer el useEffect
         try {
             await supabase.auth.signInWithOAuth({
                 provider: 'github'
@@ -71,8 +69,59 @@ export function AuthContextProvider({children}) {
         window.location.reload(true)
     } 
 
+   const updateEmail = async(newEmail) => {
+        const { error } = await supabase.auth.updateUser({email: newEmail})
+        
+        return error 
+        ? toast.error('Something weng wrong')
+        : toast.success(`we've sent a confirmation to your new email!`, {
+            duration: 4000,
+            closeable: true
+        })
+   }
+
+   const updateName = async(newFullName) => {
+        const { data, error } = await supabase.auth.updateUser({
+            data: {full_name: newFullName}
+        })
+        error
+         ? 
+         toast.error('something went wrong')
+         :
+         setUser({session: {
+            user: data.user
+         }})
+         window.localStorage.setItem('currentUser', JSON.stringify({session: {user: data.user}}))
+         toast.success('user updated!')
+   }
+
+   const updateUsername = async(newUsername) => {
+        const { data, error } = await supabase.auth.updateUser({
+            data: {user_name: newUsername}
+        })
+        error
+        ? 
+        toast.error('something went wrong') 
+        :
+        setUser({session: {
+            user: data.user
+        }})
+        window.localStorage.setItem('currentUser', JSON.stringify({session: {user: data.user}}))
+        toast.success('username updated!')
+   }
+
     return (
-        <Auth.Provider value={ { signInWithGithub, signUpWithEmail, signInWithEmail, signOut, user } }>
+        <Auth.Provider value={ 
+            { 
+                signInWithGithub, 
+                signUpWithEmail, 
+                signInWithEmail, 
+                signOut, 
+                updateEmail,
+                updateName,
+                updateUsername,
+                user 
+            } }>
             {children}
         </Auth.Provider>
     )
