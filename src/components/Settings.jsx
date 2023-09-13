@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/auth";
 import { Header } from "./Home/Header";
+import { useMetadata } from "../hooks/useMetadata";
 
 export function Settings() {
 
-    const { user, updateEmail, updateName, updateUsername } = useAuth()
-
-    const metadata = user.session.user.user_metadata
-
-    const userAvatar = metadata.avatar_url
-    const username = metadata.user_name
-    const fullName = metadata.full_name
-    const userEmail = user.session.user.email
+    const { updateEmail, updateName, updateUsername } = useAuth()
+    const { userAvatar, username, fullName, userEmail } = useMetadata()
 
     const [info, setInfo] = useState({
         username: '',
