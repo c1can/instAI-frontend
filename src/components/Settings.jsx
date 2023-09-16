@@ -1,43 +1,12 @@
-import { useState } from "react";
-import { useAuth } from "../hooks/auth";
 import { Header } from "./Home/Header";
 import { useMetadata } from "../hooks/useMetadata";
+import { useSettings } from "../hooks/settingsPage/useSettings";
 
 export function Settings() {
 
-    const { updateEmail, updateName, updateUsername } = useAuth()
     const { userAvatar, username, fullName, userEmail } = useMetadata()
+    const { handleChange, handleSubmit } = useSettings()
 
-    const [info, setInfo] = useState({
-        username: '',
-        name: '',
-        email: ''
-    })
-    const handleChange = e => {
-        setInfo({...info, [e.target.name]: e.target.value})
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-
-        const {  username, name, email } = info
-
-        switch(e.target.id) {
-            case 'email': {
-                updateEmail(email)
-                break;
-            }
-            case 'name': {
-                updateName(name)
-                break;
-            }
-            case 'username': {
-                updateUsername(username)
-                break;
-            }
-        }
-
-    }
 
     return (
         <>
