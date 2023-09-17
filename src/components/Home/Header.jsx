@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link } from "wouter"
 import { useAuth } from "../../hooks/auth"
 import { useMetadata } from "../../hooks/useMetadata"

@@ -1,42 +1,10 @@
-import { useState } from "react"
-import { toast } from "wc-toast"
-import { Link, useLocation } from "wouter"
-import { useAuth } from "../hooks/auth"
+import { Link } from "wouter"
 import { Header } from './Home/Header'
+import { useLogin } from "../hooks/Login/useLogin"
 
 export function Login() {
 
-    const userTemplate = {
-        email: '',
-        password: ''
-    }
-
-    const { signInWithEmail, signInWithGithub } = useAuth()
-    const [userData, setData] = useState(userTemplate)
-    const [, setPath] = useLocation()
-
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        const { email, password } = userData
-
-        if(email == '' || password == '') return toast.error('Fill in all the inputs', {
-            theme: {
-                type: 'dark'
-            }
-        })
-
-        setData(userTemplate)
-
-        const error = await signInWithEmail(email, password)
-
-        if(error) return toast.error(error, {
-            theme: {
-                type: 'dark'
-            }
-        })
-
-        setPath("/")
-    }
+    const { handleSubmit, userData, setData, signInWithGithub } = useLogin()
 
     return (
        <>
