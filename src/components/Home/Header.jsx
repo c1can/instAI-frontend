@@ -46,18 +46,20 @@ export function Header() {
 
                                 <nav className="my-4">
                                     <ul className="flex flex-col gap-2">
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 transition-all">
-                                            <Link href="/settings" className="block py-2">
+                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-300 transition-all py-2">
+                                            <Link href="/settings" className="block">
                                                 Profile Settings
                                             </Link>
                                         </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
-                                            <a href="#" className="block">Dashboard</a>
+                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-300 py-2 transition-all">
+                                            <Link href="/dashboard" className="block">
+                                                Dashboard
+                                            </Link>
                                         </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
+                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-300 py-2 transition-all">
                                             <a href="#" className="block">Liked</a>
                                         </li>
-                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-100 py-2 transition-all">
+                                        <li className="text-gray-600 pl-4 hover:gray-800 hover:bg-gray-300 py-2 transition-all">
                                             <p>Theme</p>
                                         </li>
                                     </ul>
