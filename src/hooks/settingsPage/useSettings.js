@@ -1,10 +1,12 @@
 import { useAuth } from "../auth"
 import { useState } from "react"
+import { useMetadata } from "../useMetadata"
 
 export function useSettings() {
 
 
     const { updateEmail, updateName, updateUsername } = useAuth()
+    const { username } = useMetadata()
 
     const [ info, setInfo ] = useState({
         username: '',
@@ -20,10 +22,11 @@ export function useSettings() {
     const handleSubmit = e => {
         e.preventDefault()
 
-        const {  username, name, email } = info
+        const {  username: newUsername, name, email } = info
 
         switch(e.target.id) {
             case 'email': {
+                //añadir validacion a cada caso por si estan vacios los inputs
                 updateEmail(email)
                 break;
             }
@@ -32,7 +35,7 @@ export function useSettings() {
                 break;
             }
             case 'username': {
-                updateUsername(username)
+                updateUsername(username, newUsername)
                 break;
             }
         }

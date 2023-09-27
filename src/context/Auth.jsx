@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
 import { getStorage } from "../utils/getLocalStorage";
 import { toast } from "wc-toast";
+import { ediPosts } from "../services/editPosts";
 
 export const Auth = createContext({})
 
@@ -95,7 +96,7 @@ export function AuthContextProvider({children}) {
          toast.success('user updated!')
    }
 
-   const updateUsername = async(newUsername) => {
+   const updateUsername = async(actualUsername, newUsername) => {
         const { data, error } = await supabase.auth.updateUser({
             data: {user_name: newUsername}
         })
@@ -103,6 +104,8 @@ export function AuthContextProvider({children}) {
         ? 
         toast.error('something went wrong') 
         :
+        await ediPosts(actualUsername, newUsername)
+        
         setUser({session: {
             user: data.user
         }})
