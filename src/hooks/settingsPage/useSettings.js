@@ -13,11 +13,7 @@ export function useSettings() {
         name: '',
         email: ''
     })
-
-
-    const handleChange = e => {
-        setInfo({...info, [e.target.name]: e.target.value})
-    }
+    const handleChange = e => setInfo({...info, [e.target.name]: e.target.value})
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -26,7 +22,6 @@ export function useSettings() {
 
         switch(e.target.id) {
             case 'email': {
-                //añadir validacion a cada caso por si estan vacios los inputs
                 updateEmail(email)
                 break;
             }

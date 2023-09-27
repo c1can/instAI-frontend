@@ -71,6 +71,8 @@ export function AuthContextProvider({children}) {
     } 
 
    const updateEmail = async(newEmail) => {
+        if(!newEmail) return toast.error('Please fill the input!')
+
         const { error } = await supabase.auth.updateUser({email: newEmail})
         
         return error 
@@ -82,6 +84,8 @@ export function AuthContextProvider({children}) {
    }
 
    const updateName = async(newFullName) => {
+        if(!newFullName) return toast.error('Please fill the input!')
+
         const { data, error } = await supabase.auth.updateUser({
             data: {full_name: newFullName}
         })
@@ -97,6 +101,8 @@ export function AuthContextProvider({children}) {
    }
 
    const updateUsername = async(actualUsername, newUsername) => {
+        if(!newUsername) return toast.error('Please fill the input!')
+
         const { data, error } = await supabase.auth.updateUser({
             data: {user_name: newUsername}
         })
