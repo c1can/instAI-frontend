@@ -1,7 +1,7 @@
 import { Link } from "wouter"
 import { usePosts } from "../../hooks/usePosts"
 import { Header } from "./Header"
-import Card from "./Card"
+import { Card } from "./Card"
 
 export function Home() {
     const { posts } = usePosts()
