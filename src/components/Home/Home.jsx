@@ -12,7 +12,10 @@ export function Home() {
             <main className="py-10">
                 <div className="container m-auto">
                     <div className="headerMain mb-8 flex justify-between items-center">
-                       <h1 className="text-2xl font-semibold">Community Posts</h1>
+                       <div className="textPrincipal">
+                            <h1 className="text-2xl font-semibold">Community Posts</h1>
+                            <p className="text-gray-500 pt-1 pb-2">Take a look at different creations with their prompts</p>
+                       </div>
                         <Link to="/create">
                             <a className="bg-black border border-black text-white py-2 px-8 rounded-lg hover:bg-white hover:text-black">Create</a>
                         </Link>
