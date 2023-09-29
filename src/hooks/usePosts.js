@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
-import { getPosts } from "../services/getPosts";
+import { useContext } from "react";
+import { PostContext } from "../context/Post";
 
 export function usePosts() {
-    const [ posts, setPosts ] = useState([])
+    const {posts} = useContext(PostContext)
 
-    useEffect(() => {
-        getPosts()
-            .then(data => {
-                return data
-                ? setPosts(data)
-                : setPosts({ error: 'Error de conexion' })
-            })
-    }, [])
 
     return { posts }
 }
