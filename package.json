@@ -12,6 +12,7 @@
     "@supabase/supabase-js": "^2.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-heart": "^1.0.6",
     "wc-toast": "^1.2.9",
     "wouter": "^2.10.0"
   },
